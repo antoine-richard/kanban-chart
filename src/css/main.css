@@ -1,0 +1,33 @@
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+input {
+  width: 3em;
+}
+input.ng-pristine {
+  color: #999;
+}
+input.ng-dirty {
+  color: #222;
+}
+
+th, td {
+  width: 8em;
+  text-align: center;
+  line-height: 2em;
+}
+
+tbody th {
+  text-align: left;
+}
+
+button {
+  font-size: 0.8em;
+  line-height: 1.2em;
+}

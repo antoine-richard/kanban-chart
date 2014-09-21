@@ -1,0 +1,36 @@
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Ready to start</th>
+      <th>Implementing</th>
+      <th>Ready to test</th>
+      <th>Testing</th>
+      <th>Ready to release</th>
+      <th>Done</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-form>
+      <th>Today</th>
+      <td><input type="number" ng-model="today.work[0]" min="0"/></td>
+      <td><input type="number" ng-model="today.work[1]" min="0"/></td>
+      <td><input type="number" ng-model="today.work[2]" min="0"/></td>
+      <td><input type="number" ng-model="today.work[3]" min="0"/></td>
+      <td><input type="number" ng-model="today.work[4]" min="0"/></td>
+      <td><input type="number" ng-model="today.work[5]" min="0"/></td>
+      <td><button ng-click="add()">{{today.id}} Add</button></td>
+    </tr>
+    <tr ng-repeat="day in pastDays track by day.id">
+      <th>d-{{$index + 1}}</th>
+      <td>{{day.work[0]}}</td>
+      <td>{{day.work[1]}}</td>
+      <td>{{day.work[2]}}</td>
+      <td>{{day.work[3]}}</td>
+      <td>{{day.work[4]}}</td>
+      <td>{{day.work[5]}}</td>
+      <td><button ng-click="remove(day.id)">{{day.id}} Remove</button></td>
+    </tr>
+  </tbody>
+</table>
