@@ -1,0 +1,36 @@
+{
+  "name": "kanban-chart",
+  "version": "0.1.0",
+  "description": "Cumulative Flow Diagram for teams using Kanban",
+  "author": "Antoine Richard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antoine-richard/kanban-chart.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/antoine-richard/kanban-chart/issues"
+  },
+  "homepage": "https://github.com/antoine-richard/kanban-chart",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "express": "~4.9.5",
+    "morgan": "~1.3.2",
+    "compression": "~1.1.0",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "napa": "~1.0.1"
+  },
+  "napa": {
+    "angular": "angular/bower-angular",
+    "angular-route": "angular/bower-angular-route"
+  },
+  "scripts": {
+    "install": "napa && browserify client/src/main.js > client/bundle.js",
+    "test": "echo \"No test specified\" && exit 1",
+    "start": "node server/app.js"
+  }
+}
