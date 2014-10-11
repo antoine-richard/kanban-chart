@@ -1,14 +1,14 @@
 language: node_js
 node_js:
 - '0.10'
-after_install:
+before_install:
 - npm install -g browserify
 - browserify client/src/main.js > client/bundle.js
 deploy:
   provider: heroku
   buildpack: nodejs
+  api_key:
+    secure: D/iEcMjQycGRKFhmZkQjgmk8cBJq6vxHASPa62WyEMKLnTgtNLL8w2RGmArBx8tiGd37GsXx7npVX0xBLDYReLUE36WADNKKd40NXe4VOMjzXA0xFureMr4PT22YSn2eMp/RGvKqO5NEM1XA69C8bWP+ydw42B0Qg7XQYPOzSwU=
   app:
     master: kanban-chart
   skip_cleanup: true
-  api_key:
-    secure: D/iEcMjQycGRKFhmZkQjgmk8cBJq6vxHASPa62WyEMKLnTgtNLL8w2RGmArBx8tiGd37GsXx7npVX0xBLDYReLUE36WADNKKd40NXe4VOMjzXA0xFureMr4PT22YSn2eMp/RGvKqO5NEM1XA69C8bWP+ydw42B0Qg7XQYPOzSwU=
