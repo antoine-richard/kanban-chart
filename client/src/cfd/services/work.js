@@ -1,7 +1,6 @@
 var _ = require('lodash');
 
-angular.module('app.cfd')
-.factory('work', function() {
+module.exports = function() {
 
   var db = [
     { id: 102, work: [18, 1, 4, 1, 1, 1] },
@@ -31,4 +30,4 @@ angular.module('app.cfd')
     }
   };
 
-});
+};

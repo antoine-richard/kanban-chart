@@ -1,5 +1,4 @@
-angular.module('app.cfd')
-.controller('CfdCtrl', function($scope, work) {
+module.exports = function($scope, work) {
 
   $scope.pastDays = work.get();
   $scope.today = work.newWorkDay();
@@ -14,4 +13,4 @@ angular.module('app.cfd')
     $scope.today = work.newWorkDay();
   };
 
-});
+};
