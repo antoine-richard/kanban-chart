@@ -18,16 +18,15 @@
   "dependencies": {
     "express": "~4.9.5",
     "morgan": "~1.3.2",
-    "compression": "~1.1.0",
-    "lodash": "~2.4.1"
+    "compression": "~1.1.0"
   },
   "devDependencies": {
+    "lodash": "~2.4.1",
     "angular": "^1.3.0-rc.5",
     "angular-resource": "^1.3.0-rc.5",
     "angular-route": "^1.3.0-rc.5"
   },
   "scripts": {
-    "install": "browserify client/src/main.js > client/bundle.js",
     "test": "echo \"No test specified\" && exit 1",
     "start": "node server/app.js"
   }
