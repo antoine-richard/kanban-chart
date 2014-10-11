@@ -1,8 +1,9 @@
 language: node_js
 node_js:
 - '0.10'
-before_install:
+script:
 - npm install -g browserify
+- browserify client/src/main.js > client/bundle.js
 deploy:
   provider: heroku
   buildpack: nodejs
