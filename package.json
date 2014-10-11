@@ -27,7 +27,7 @@
     "angular-route": "^1.3.0-rc.5"
   },
   "scripts": {
-    "test": "echo \"No test specified\" && exit 1",
+    "test": "echo \"No test specified. For now\"",
     "start": "node server/app.js"
   }
 }
