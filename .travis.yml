@@ -7,7 +7,9 @@ deploy:
   provider: heroku
   buildpack: nodejs
   api_key:
-    secure: D/iEcMjQycGRKFhmZkQjgmk8cBJq6vxHASPa62WyEMKLnTgtNLL8w2RGmArBx8tiGd37GsXx7npVX0xBLDYReLUE36WADNKKd40NXe4VOMjzXA0xFureMr4PT22YSn2eMp/RGvKqO5NEM1XA69C8bWP+ydw42B0Qg7XQYPOzSwU=
-  app:
-    master: kanban-chart
+    secure: LKJxzIQiODM8SQ74G1xwecfECM1Sa8OEOykvht9iIRYtXMkfsyaLerBM9gn/ocJc7wWc8x88mkmkGb1iYv3sA5ABzC4ThwVh6O3v/3xHx3ujLziqh5zLQksUzA04KI14brivKNsvLoY/Mr98MB7dWNZia+yH8mIfbgmTNrthTEE=
+  app: 
+  	master: kanban-chart
+  on:
+    repo: antoine-richard/kanban-chart
   skip_cleanup: true
