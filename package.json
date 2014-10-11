@@ -22,14 +22,12 @@
     "lodash": "~2.4.1"
   },
   "devDependencies": {
-    "napa": "~1.0.1"
-  },
-  "napa": {
-    "angular": "angular/bower-angular",
-    "angular-route": "angular/bower-angular-route"
+    "angular": "^1.3.0-rc.5",
+    "angular-resource": "^1.3.0-rc.5",
+    "angular-route": "^1.3.0-rc.5"
   },
   "scripts": {
-    "install": "napa && browserify client/src/main.js > client/bundle.js",
+    "install": "browserify client/src/main.js > client/bundle.js",
     "test": "echo \"No test specified\" && exit 1",
     "start": "node server/app.js"
   }
