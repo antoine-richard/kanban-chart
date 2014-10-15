@@ -1,0 +1,37 @@
+var gulp       = require('gulp')
+  , del        = require('del')
+  , jshint     = require('gulp-jshint')
+  , browserify = require('gulp-browserify')
+  , rename     = require('gulp-rename')
+  , ngAnnotate = require('gulp-ng-annotate')
+  , uglify     = require('gulp-uglify');
+
+gulp.task('clean', function (cb) {
+  del('client/js/**', cb);
+});
+
+gulp.task('lint', function() {
+  gulp.src('client/src/**/*.js')
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'));
+});
+
+gulp.task('build', function() {
+  gulp.src('client/src/main.js')
+      .pipe(browserify({
+        insertGlobals : false, // true ?
+        debug : false
+      }))
+      .pipe(rename('bundle.js'))
+      .pipe(uglify({mangle: false}))
+      .pipe(gulp.dest('client/js'));
+});
+
+gulp.task('watch', /*['lint'],*/ function() {
+  gulp.watch(['client/src/**/*.js'], [
+    'lint',
+    'build'
+  ]);
+});
+
+gulp.task('default', ['clean', 'lint', 'build']);

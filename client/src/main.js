@@ -7,7 +7,7 @@ require('./cfd/directives/diagram');
 angular.module('app', ['ngRoute'])
 
 .controller('CfdCtrl', require('./cfd/controllers/input'))
-.factory(   'work',    require('./cfd/services/work'))
+.factory('work', require('./cfd/services/work'))
 
 .config(function($routeProvider) {
   $routeProvider

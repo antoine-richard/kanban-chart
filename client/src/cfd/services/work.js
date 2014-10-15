@@ -10,7 +10,7 @@ module.exports = function() {
 
   var nextId = function() {
     return _.max(db, 'id').id + 1;
-  }
+  };
 
   return {
     get: function() {
