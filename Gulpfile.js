@@ -7,16 +7,10 @@ var gulp       = require('gulp')
   , uglify     = require('gulp-uglify');
 
 gulp.task('clean', function (cb) {
-  del('client/js/**', cb);
+  del('client/js/*', cb);
 });
 
-gulp.task('lint', function() {
-  gulp.src('client/src/**/*.js')
-      .pipe(jshint())
-      .pipe(jshint.reporter('default'));
-});
-
-gulp.task('build', function() {
+gulp.task('build', ['clean'], function() {
   gulp.src('client/src/main.js')
       .pipe(browserify({
         insertGlobals : false, // true ?
@@ -27,11 +21,17 @@ gulp.task('build', function() {
       .pipe(gulp.dest('client/js'));
 });
 
-gulp.task('watch', /*['lint'],*/ function() {
+gulp.task('lint', function() {
+  gulp.src('client/src/**/*.js')
+      .pipe(jshint())
+      .pipe(jshint.reporter('default'));
+});
+
+gulp.task('watch', ['default'], function() {
   gulp.watch(['client/src/**/*.js'], [
     'lint',
     'build'
   ]);
 });
 
-gulp.task('default', ['clean', 'lint', 'build']);
+gulp.task('default', ['lint', 'build']);
