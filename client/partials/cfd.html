@@ -22,7 +22,7 @@
       <td><input type="number" ng-model="today.test" min="0"/></td>
       <td><input type="number" ng-model="today.rdyRelease" min="0"/></td>
       <td><input type="number" ng-model="today.done" min="0"/></td>
-      <td><button ng-click="add()">{{today._id}} Add</button></td>
+      <td><button ng-click="add()">Add</button></td>
     </tr>
     <tr ng-repeat="day in pastDays track by day._id">
       <th>d-{{$index + 1}}</th>

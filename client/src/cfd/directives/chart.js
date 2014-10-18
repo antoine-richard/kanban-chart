@@ -1,7 +1,5 @@
-var d3 = require('d3'),
-    _  = require('lodash');
-
-console.log('d3 v'+d3.version);
+var d3 = require('d3')/*,
+    _  = require('lodash')*/;
 
 module.exports = function() {
   return {
@@ -19,6 +17,7 @@ module.exports = function() {
       var y = d3.scale.linear()/*.domain([0, 0.2])*/ .range([height, 0]);
 
       var color = d3.scale.category20();
+      color.domain(d3.keys(scope.data[0]).filter(function(key) { return key !== "_id"; }));
 
       var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat('');
       var yAxis = d3.svg.axis().scale(y).orient("left");
@@ -36,43 +35,40 @@ module.exports = function() {
         .append("g")
           .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+      svg.append("g")
+          .attr("class", "x axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(xAxis);
+
+      svg.append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
 
       scope.$watchCollection('data', function(data) {
-        //if (data) {
-          //data = _.sortBy(data, function(item) { return -item._id; });
 
-          color.domain(d3.keys(data[0]).filter(function(key) { return key !== "_id"; }));
+        //data = _.sortBy(data, function(item) { return -item._id; });
 
-          var browsers = stack(color.domain().map(function(key) {
-            return {
-              key: key,
-              values: data.map(function(d) {
-                return {_id: d._id, y: d[key] / 100};
-              })
-            };
-          }));
+        var flow = stack(color.domain().map(function(key) {
+          return {
+            key: key,
+            values: scope.data.map(function(d) {
+              return {_id: d._id, y: d[key]};
+            })
+          };
+        }));
 
-          x.domain(d3.extent(data, function(d) { return d._id; }));
+        x.domain(d3.extent(scope.data, function(d) { return d._id; }));
 
-          var work = svg.selectAll(".work")
-              .data(browsers)
-            .enter().append("g")
+        svg.selectAll(".work")
+            .data(flow)
+            .enter()
+              .append("g")
               .attr("class", "work");
-
-          work.append("path")
-              .attr("class", "area")
-              .attr("d", function(d) { return area(d.values); })
-              .style("fill", function(d) { return color(d.key); });
-
-          svg.append("g")
-              .attr("class", "x axis")
-              .attr("transform", "translate(0," + height + ")")
-              .call(xAxis);
-
-          svg.append("g")
-              .attr("class", "y axis")
-              .call(yAxis);
-        //}
+                .append("path")
+                .attr("class", "area")
+                .attr("d", function(d) { return area(d.values); })
+                .style("fill", function(d) { return color(d.key); });
+        
       });
     }
   };
