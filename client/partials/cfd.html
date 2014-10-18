@@ -1,3 +1,5 @@
+<kc-cfd data="pastDays"></kc-cfd>
+
 <table>
   <thead>
     <tr>
@@ -14,23 +16,23 @@
   <tbody>
     <tr ng-form>
       <th>Today</th>
-      <td><input type="number" ng-model="today.work[0]" min="0"/></td>
-      <td><input type="number" ng-model="today.work[1]" min="0"/></td>
-      <td><input type="number" ng-model="today.work[2]" min="0"/></td>
-      <td><input type="number" ng-model="today.work[3]" min="0"/></td>
-      <td><input type="number" ng-model="today.work[4]" min="0"/></td>
-      <td><input type="number" ng-model="today.work[5]" min="0"/></td>
-      <td><button ng-click="add()">{{today.id}} Add</button></td>
+      <td><input type="number" ng-model="today.rdyDev" min="0"/></td>
+      <td><input type="number" ng-model="today.dev" min="0"/></td>
+      <td><input type="number" ng-model="today.rdyTest" min="0"/></td>
+      <td><input type="number" ng-model="today.test" min="0"/></td>
+      <td><input type="number" ng-model="today.rdyRelease" min="0"/></td>
+      <td><input type="number" ng-model="today.done" min="0"/></td>
+      <td><button ng-click="add()">{{today._id}} Add</button></td>
     </tr>
-    <tr ng-repeat="day in pastDays track by day.id">
+    <tr ng-repeat="day in pastDays track by day._id">
       <th>d-{{$index + 1}}</th>
-      <td>{{day.work[0]}}</td>
-      <td>{{day.work[1]}}</td>
-      <td>{{day.work[2]}}</td>
-      <td>{{day.work[3]}}</td>
-      <td>{{day.work[4]}}</td>
-      <td>{{day.work[5]}}</td>
-      <td><button ng-click="remove(day.id)">{{day.id}} Remove</button></td>
+      <td>{{day.rdyDev}}</td>
+      <td>{{day.dev}}</td>
+      <td>{{day.rdyTest}}</td>
+      <td>{{day.test}}</td>
+      <td>{{day.rdyRelease}}</td>
+      <td>{{day.done}}</td>
+      <td><button ng-click="remove(day._id)">{{day._id}} Remove</button></td>
     </tr>
   </tbody>
 </table>

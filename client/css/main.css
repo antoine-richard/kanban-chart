@@ -31,3 +31,12 @@ button {
   font-size: 0.8em;
   line-height: 1.2em;
 }
+
+/* chart */
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
