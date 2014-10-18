@@ -52,7 +52,7 @@ module.exports = function() {
           return {
             key: key,
             values: scope.data.map(function(d) {
-              return {_id: d._id, y: d[key]};
+              return {_id: d._id, y: d[key] / 20 /* ? */};
             })
           };
         }));
@@ -63,7 +63,7 @@ module.exports = function() {
             .data(flow)
             .enter()
               .append("g")
-              .attr("class", "work");
+              .attr("class", "work")
                 .append("path")
                 .attr("class", "area")
                 .attr("d", function(d) { return area(d.values); })
