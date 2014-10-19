@@ -6,6 +6,7 @@ script:
 - gulp
 deploy:
   provider: heroku
+  strategy: api
   buildpack: nodejs
   api_key:
     secure: LKJxzIQiODM8SQ74G1xwecfECM1Sa8OEOykvht9iIRYtXMkfsyaLerBM9gn/ocJc7wWc8x88mkmkGb1iYv3sA5ABzC4ThwVh6O3v/3xHx3ujLziqh5zLQksUzA04KI14brivKNsvLoY/Mr98MB7dWNZia+yH8mIfbgmTNrthTEE=
