@@ -3,6 +3,6 @@ require('angular/angular');
 angular
 .module('cfd', [])
 
+.factory('work', require('./work'))
 .controller('CfdCtrl', require('./controllers/input'))
-.factory('work', require('./services/work'))
-.directive('kcCfd', require('./directives/chart'));
+.directive('kcCfd', require('./diagram/directive'));

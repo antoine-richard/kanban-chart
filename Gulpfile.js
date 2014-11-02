@@ -6,6 +6,7 @@ var gulp        = require('gulp')
   , buffer      = require('vinyl-buffer')
   , ngannotate  = require('browserify-ngannotate')
   , minifyify   = require('minifyify')
+  , mocha       = require('gulp-mocha')
   , util        = require('gulp-util')
   , watchify    = require('watchify')
   , browserSync = require('browser-sync');
@@ -14,16 +15,25 @@ var gulp        = require('gulp')
 /* RELEASE MODE (one shot) */
 
 // Default task
-gulp.task('default', ['lint', 'browserify']);
+gulp.task('default', ['test', 'browserify']);
 
 // Lint
 gulp.task('lint', function() {
   gulp.src([
     './client/src/**/*.js',
+    './client/test/**/*.js',
     './gulpfile.js'
   ])
   .pipe(jshint({ laxcomma: true }))
   .pipe(jshint.reporter('default'));
+});
+
+// Test
+gulp.task('test', ['lint'], function () {
+  return gulp.src([
+    './client/test/**/*.js'
+  ])
+  .pipe(mocha(/*{ reporter: 'dot' }*/));
 });
 
 // Clean
