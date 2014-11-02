@@ -14,7 +14,7 @@ module.exports = function() {
           height = 500 - margin.top - margin.bottom;
 
       var x = d3.time.scale().range([0, width]);
-      var y = d3.scale.linear()/*.domain([0, 0.2])*/ .range([height, 0]);
+      var y = d3.scale.linear().domain([0, 20]).range([height, 0]);
 
       var color = d3.scale.category20();
       color.domain(d3.keys(scope.data[0]).filter(function(key) { return key !== "_id"; }));
@@ -46,21 +46,22 @@ module.exports = function() {
 
       scope.$watchCollection('data', function(data) {
 
+        x.domain(d3.extent(scope.data, function(d) { return d._id; }));
         //data = _.sortBy(data, function(item) { return -item._id; });
 
         var flow = stack(color.domain().map(function(key) {
           return {
             key: key,
             values: scope.data.map(function(d) {
-              return {_id: d._id, y: d[key] / 20 /* ? */};
+              return {_id: d._id, y: d[key]};
             })
           };
         }));
 
-        x.domain(d3.extent(scope.data, function(d) { return d._id; }));
-
         svg.selectAll(".work")
-            .data(flow)
+            .data(flow/*, function(d, i) {
+              return d;
+            }*/)
             .enter()
               .append("g")
               .attr("class", "work")
@@ -68,6 +69,8 @@ module.exports = function() {
                 .attr("class", "area")
                 .attr("d", function(d) { return area(d.values); })
                 .style("fill", function(d) { return color(d.key); });
+
+
         
       });
     }

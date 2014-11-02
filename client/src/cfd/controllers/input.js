@@ -1,4 +1,4 @@
-module.exports = function($scope, work) {
+module.exports = /* @ngInject */ function($scope, work) {
 
   $scope.pastDays = work.get();
   $scope.today = work.newDay();

@@ -10,7 +10,7 @@ module.exports = function() {
   ];
 
   var nextId = function() {
-    if (!db.length) return 0; 
+    if (!db.length) return 0;
     return _.max(db, '_id')._id + 1;
   };
 

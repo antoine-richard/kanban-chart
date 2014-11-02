@@ -4,8 +4,8 @@ var gulp        = require('gulp')
   , browserify  = require('browserify')
   , source      = require('vinyl-source-stream')
   , buffer      = require('vinyl-buffer')
-  , sourcemaps  = require('gulp-sourcemaps')
-  , uglify      = require('gulp-uglify')
+  , ngannotate  = require('browserify-ngannotate')
+  , minifyify   = require('minifyify')
   , util        = require('gulp-util')
   , watchify    = require('watchify')
   , browserSync = require('browser-sync');
@@ -16,7 +16,7 @@ var gulp        = require('gulp')
 // Default task
 gulp.task('default', ['lint', 'browserify']);
 
-// Lint task
+// Lint
 gulp.task('lint', function() {
   gulp.src([
     './client/src/**/*.js',
@@ -26,62 +26,57 @@ gulp.task('lint', function() {
   .pipe(jshint.reporter('default'));
 });
 
-// Clean task
+// Clean
 gulp.task('clean', function (cb) {
   del('./client/js', cb);
 });
 
-// Browserify task
+// Browserify
 gulp.task('browserify', ['clean'], function() {
 
-  var bundler = browserify({
+  return browserify({
     entries: ['./client/src/main.js'],
     debug: true
-  });
+  })
+  .transform(ngannotate)
+  .plugin('minifyify', {
+    map: 'bundle.js.map',
+    output: './client/js/bundle.js.map'
+  })
+  .bundle()
+  .on('error', util.log.bind(util, 'Browserify Error'))
+  .pipe(source('bundle.js'))
+  .pipe(buffer())
+  .pipe(gulp.dest('./client/js/'));
 
-  function bundle() {
-    return bundler.bundle()
-      .on('error', util.log.bind(util, 'Browserify Error'))
-      .pipe(source('bundle.js'))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(uglify({mangle: false}))
-      .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest('./client/js/'));
-  }
-
-  return bundle();
 });
 
 
 /* DEV MODE (watch) */
 
-// BrowserSync task
-gulp.task('browser-sync', function() {
-  browserSync({
-    server: {
-      baseDir: "./"
-    }
-  });
-});
-
-// Watchify task (without uglify nor sourceMaps)
+// Watchify (without uglify nor sourcemaps)
 gulp.task('watchify', function() {
 
-  var bundler = watchify(browserify('./client/src/main.js', watchify.args));
+  var bundler = watchify(browserify('./client/src/main.js', {debug: true}));
 
   function rebundle() {
     return bundler.bundle()
       .on('error', util.log.bind(util, 'Browserify Error'))
       .pipe(source('bundle.js'))
-      .pipe(gulp.dest('./client/js/'));
+      .pipe(gulp.dest('./client/js/'))
+      .pipe(browserSync.reload({stream: true, once: true}));
   }
 
   bundler.on('update', rebundle);
+
   return rebundle();
 });
 
-// Watch task
-gulp.task('watch', ['browser-sync'], function () {
-  gulp.watch('./client/src/**/*.js', ['watchify', browserSync.reload]);
+// Watch (BrowserSync)
+gulp.task('watch', ['watchify'], function() {
+  browserSync({
+    server: {
+      baseDir: "./"
+    }
+  });
 });
