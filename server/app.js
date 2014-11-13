@@ -8,6 +8,7 @@ app.use(morgan('short'));
 app.use(compression());
 
 app.use(express.static('client'));
+app.use('/data', express.static('server/data'));
 
 app.listen(port, function() {
   console.log('kanban-chart server listening on port ' + port);

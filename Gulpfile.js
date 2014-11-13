@@ -85,8 +85,6 @@ gulp.task('watchify', function() {
 // Watch (BrowserSync)
 gulp.task('watch', ['watchify'], function() {
   browserSync({
-    server: {
-      baseDir: "./"
-    }
+    proxy: 'localhost:3000'
   });
 });
