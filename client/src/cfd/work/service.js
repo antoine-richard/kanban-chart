@@ -1,14 +1,14 @@
 var _ = require('lodash');
 
-module.exports = /* @ngInject */ function($resource, $q) {
+module.exports = /* @ngInject */ function(workResource, $q) {
 
   var cachedWork, p;
 
   function doGet() {
     var deferred = $q.defer();
     p = deferred.promise;
-    $resource('data/work.json').query(function(work) {
-      cachedWork = angular.fromJson(angular.toJson(work));  // beurk
+    workResource.query(function(work) {
+      cachedWork = JSON.parse(JSON.stringify(work));  // beurk
       deferred.resolve(cachedWork);
     });
     return deferred.promise;

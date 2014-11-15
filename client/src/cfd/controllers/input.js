@@ -1,18 +1,18 @@
-module.exports = /* @ngInject */ function($scope, workData) {
+module.exports = /* @ngInject */ function($scope, workService) {
 
-  workData.get().then(function(work) {
+  workService.get().then(function(work) {
     $scope.pastDays = work;
-    $scope.today = workData.newDay();
+    $scope.today = workService.newDay();
   });
 
   $scope.add = function() {
-    workData.add($scope.today);
-    $scope.today = workData.newDay();
+    workService.add($scope.today);
+    $scope.today = workService.newDay();
   };
 
   $scope.remove = function(id) {
-    workData.remove(id);
-    $scope.today = workData.newDay();
+    workService.remove(id);
+    $scope.today = workService.newDay();
   };
 
 };
