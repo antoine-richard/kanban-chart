@@ -36,6 +36,8 @@
     "gulp-util": "~3.0.1",
     "lodash": "~2.4.1",
     "minifyify": "~4.4.0",
+    "q": "~1.1.1",
+    "sinon": "~1.11.1",
     "vinyl-buffer": "~1.0.0",
     "vinyl-source-stream": "~1.0.0",
     "watchify": "~2.0.0"
