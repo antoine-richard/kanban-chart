@@ -1,10 +1,10 @@
-require('angular/angular');
-require('angular-route/angular-route');
-require('angular-resource/angular-resource');
-
-require('./cfd');
+var angular = require('angular');
 
 angular
-.module('app', ['ngRoute', 'ngResource', 'cfd'])
+.module('app', [
+  require('angular-route'), 
+  require('angular-resource'), 
+  require('./cfd')
+])
 .config(require('./routes'))
 ;

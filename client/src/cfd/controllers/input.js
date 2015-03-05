@@ -1,8 +1,12 @@
+var _ = require('lodash');
+
 module.exports = /* @ngInject */ function($scope, workService) {
 
   workService.get().then(function(work) {
     $scope.pastDays = work;
     $scope.today = workService.newDay();
+    
+    $scope.done = _.pluck($scope.pastDays.reverse(), 'done');
   });
 
   $scope.add = function() {
@@ -14,5 +18,6 @@ module.exports = /* @ngInject */ function($scope, workService) {
     workService.remove(id);
     $scope.today = workService.newDay();
   };
+
 
 };
