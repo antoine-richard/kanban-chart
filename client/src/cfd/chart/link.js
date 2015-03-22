@@ -1,7 +1,5 @@
 var d3 = require('d3');
-
-// a shimer (et lui alimenter d3)
-require('nvd3/build/nv.d3');
+var nv = require('nvd3');
 
 module.exports = function(scope, element, attrs) {
 
@@ -12,7 +10,7 @@ module.exports = function(scope, element, attrs) {
   };
    
   var chart;
-   
+  
   nv.addGraph(function() {
    
     chart = nv.models.stackedAreaChart()
@@ -35,7 +33,7 @@ module.exports = function(scope, element, attrs) {
     chart.yAxisTickFormat(d3.format('d'));
    
     d3.select(element[0])
-      .data([data])
+      .data([scope.data])
       //.transition().duration(1000)
       .call(chart);
       /*.each('start', function() {
@@ -52,13 +50,11 @@ module.exports = function(scope, element, attrs) {
     return chart;
   });
 
-
-
-
   scope.$watchCollection('data', function(data) {
-    
-    chart.update();
-    
+    if (data) {
+      console.log(data);
+      chart.update();  
+    }
   });
   
 };

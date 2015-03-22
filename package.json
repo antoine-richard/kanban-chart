@@ -27,8 +27,9 @@
     "browser-sync": "~2.2.1",
     "browserify": "~9.0.3",
     "browserify-ngannotate": "~0.7.1",
+    "browserify-shim": "~3.8.3",
     "chai": "~2.1.0",
-    "d3": "~3.5.3",
+    "d3": "~3.3.13",
     "del": "~1.1.1",
     "gulp": "~3.8.8",
     "gulp-jshint": "~1.9.0",
@@ -37,7 +38,7 @@
     "lodash": "~3.3.1",
     "minifyify": "~6.3.1",
     "normalize.css": "~3.0.2",
-    "nvd3": "nvd3-community/nvd3",
+    "nvd3": "nvd3-community/nvd3#1.7.0",
     "q": "~1.2.0",
     "sinon": "~1.12.2",
     "vinyl-buffer": "~1.0.0",
@@ -47,5 +48,16 @@
   "scripts": {
     "test": "gulp test",
     "start": "node server/app.js"
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+  "browser": {
+    "d3"  :  "./node_modules/d3/d3.js",
+    "nvd3":  "./node_modules/nvd3/build/nv.d3.js"
+  },
+  "browserify-shim": {
+    "d3": "d3",
+    "nvd3":  { "exports": "nv", "depends": ["d3:d3"] }
   }
 }
