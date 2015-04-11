@@ -8,30 +8,23 @@ module.exports = /* @ngInject */ function(workResource, $q) {
     var deferred = $q.defer();
     p = deferred.promise;
     workResource.query(function(work) {
-      cachedWork = JSON.parse(JSON.stringify(work));  // beurk
-      deferred.resolve(cachedWork);
+      // bof bof tout ca... $resource utile ? (a voir apres refactoring data model)
+      cachedWork = work;
+      var uiWork = JSON.parse(JSON.stringify(cachedWork));  // beurk
+      deferred.resolve(uiWork);
     });
-    return deferred.promise;
-  }
-
-  function nextId() {
-    if (!cachedWork.length) return 0;
-    return _.max(cachedWork, '_id')._id + 1;
+    return p;
   }
 
   return {
     get: function() {
       return $q.when(cachedWork || p || doGet());
     },
-    newDay: function() {
-      return _.omit(cachedWork[0], '_id');
-    },
-    add: function(day) {
-      day._id = nextId();
-      cachedWork.unshift(day);
+    add: function(workDay) {
+      console.warn("TODO");
     },
     remove: function(id) {
-      _.remove(cachedWork, {_id: id});
+      console.warn("TODO");
     }
   };
 

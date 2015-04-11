@@ -1,6 +1,6 @@
 module.exports = function() {
   return {
-    restrict: 'E',
+    restrict: 'EA',
     scope: {
       data: '='
     },
